@@ -3,6 +3,7 @@ import os
 import sys
 import unittest
 import tempfile
+import getpass
 
 from mega import Mega
 from mega.exceptions import MegaIncorrectPasswordExcetion
