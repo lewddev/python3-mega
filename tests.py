@@ -8,6 +8,9 @@ import getpass
 from mega import Mega
 from mega.exceptions import MegaIncorrectPasswordExcetion
 
+MEGAEMAIL = None
+MEGAPASSWORD = None
+
 class TestMega(unittest.TestCase):   
     
     def setUp(self):
@@ -17,9 +20,9 @@ class TestMega(unittest.TestCase):
         if self._email is None or self._password is None:
             print("Logging in to MEGA.nz")
         if self._email is None:
-            self._email = input("Enter Email: ")
+            self._email = MEGAEMAIL
         if self._password is None:
-            self._password = getpass.getpass('Enter Password:')        
+            self._password = MEGAPASSWORD     
 
     def _check_file_exists(self, file_name, files):
         uploaded = False
@@ -81,4 +84,8 @@ class TestMega(unittest.TestCase):
         self._test_upload_file(Mega.from_ephemeral())
 
 if __name__ == '__main__':
+    if os.environ.get('MEGAEMAIL') is None or os.environ.get('MEGAPASSWORD') is None:
+        print("Logging in to MEGA.nz")
+        MEGAEMAIL = input("Enter Email: ")
+        MEGAPASSWORD= getpass.getpass('Enter Password:')        
     unittest.main()
