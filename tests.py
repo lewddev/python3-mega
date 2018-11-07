@@ -16,9 +16,9 @@ class TestMega(unittest.TestCase):
         self._password = os.environ.get('MEGAPASSWORD')
         if self._email is None or self._password is None:
             print("Logging in to MEGA.nz")
-        if email is None:
+        if self._email is None:
             self._email = input("Enter Email: ")
-        if password is None:
+        if self._password is None:
             self._password = getpass.getpass('Enter Password:')        
 
     def _check_file_exists(self, file_name, files):
